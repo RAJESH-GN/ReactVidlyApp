@@ -1,57 +1,32 @@
 import React, { Component } from "react";
-import Input from "../common/input";
+import Form from "./form";
+import Joi from "@hapi/joi";
 
-class LoginForm extends Component {
+class LoginForm extends Form {
   state = {
-    account: { username: "", password: "" },
+    data: { username: "", password: "" },
     errors: {},
   };
+
+  schema = Joi.object({
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
+  });
   //username = React.createRef();
-  handleSubmit = (e) => {
-    e.preventDefault(); //to stop reloading of the whole page after submitting form
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-    if (errors) return;
+  toDoAfterValidation = () => {
     console.log("Submitted");
   };
 
-  validate = () => {
-    const { account } = this.state;
-    let errors = {};
-    if (account.username.trim() == "") {
-      errors["username"] = "Username is required";
-    }
-    if (account.password.trim() == "") {
-      errors["password"] = "Password is required";
-    }
-    return Object.keys(errors).length === 0 ? null : errors;
-  };
-
-  handleChange = (e) => {
-    const account = { ...this.state.account };
-    account[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ account });
-  };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <Input
-          name="username"
-          label="Username"
-          onChange={this.handleChange}
-          value={this.state.account.username}
-          inputType="text"
-          errorMsg={this.state.errors.username}
-        />
-        <Input
-          name="password"
-          label="Password"
-          onChange={this.handleChange}
-          value={this.state.account.password}
-          inputType="password"
-          errorMsg={this.state.errors.password}
-        />
-        <button className="btn btn-primary" type="submit">
+        {this.renderInput("username", "Username")}
+        {this.renderInput("password", "Password", "password")}
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={this.validate()}
+        >
           Login
         </button>
       </form>

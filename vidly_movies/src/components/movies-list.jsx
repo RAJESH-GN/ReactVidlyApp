@@ -6,6 +6,7 @@ import ListGroup from "./../common/list-group";
 import { getGenres } from "./../services/fakeGenreService";
 import { paginate } from "./../common/paginate";
 import _ from "lodash";
+import { Router } from "react-router-dom";
 
 class MoviesList extends Component {
   state = {
@@ -47,8 +48,15 @@ class MoviesList extends Component {
   };
 
   handleSort = (sortColumn) => {
-    console.log("App -> handleSort -> sortColumn", sortColumn);
     this.setState({ sortColumn });
+  };
+
+  handleNewMovie = () => {
+    /* this.props.history.push({
+      pathname: "/movies/register",
+      state: { genres: this.state.genres },
+    }); */
+    this.props.history.push("/movies/register");
   };
   render() {
     const { movies, currentPage, selectedGenre } = this.state;
@@ -78,6 +86,9 @@ class MoviesList extends Component {
           />
         </div>
         <div className="col">
+          <div className="btn btn-primary" onClick={this.handleNewMovie}>
+            New Movie
+          </div>
           <Movies
             movies={filteredMovies}
             currentPage={this.state.currentPage}
