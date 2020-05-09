@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "./form";
 import Joi from "@hapi/joi";
 import { getGenres } from "./../services/fakeGenreService";
-import Select from "../common/select";
 
 class RegisterMovie extends Form {
   state = {
@@ -35,9 +34,7 @@ class RegisterMovie extends Form {
         )}
         {this.renderInput("stock", "Number in Stock", "number")}
         {this.renderInput("rate", "Rate", "number")}
-        <button className="btn btn-primary" disabled={this.validate()}>
-          Submit
-        </button>
+        {this.renderButton("Save")}
       </form>
     );
   }
