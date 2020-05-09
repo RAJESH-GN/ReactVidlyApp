@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
-const Select = ({ name, label, onChange, optionValues, errorMessage }) => {
+const Select = ({
+  name,
+  value,
+  label,
+  onChange,
+  optionValues,
+  errorMessage,
+}) => {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
@@ -9,6 +16,7 @@ const Select = ({ name, label, onChange, optionValues, errorMessage }) => {
         name={name}
         className="form-control"
         onChange={onChange}
+        value={value}
       >
         <option value=""></option>
         {optionValues.map((option) => (

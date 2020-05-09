@@ -56,7 +56,7 @@ class MoviesList extends Component {
       pathname: "/movies/register",
       state: { genres: this.state.genres },
     }); */
-    this.props.history.push("/movies/register");
+    this.props.history.push("/movies/new");
   };
   render() {
     const { movies, currentPage, selectedGenre } = this.state;

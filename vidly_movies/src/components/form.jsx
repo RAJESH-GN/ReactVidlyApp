@@ -29,7 +29,6 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
-    debugger;
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -40,6 +39,7 @@ class Form extends Component {
   };
 
   validateProperty = (input) => {
+    console.log("validateProperty -> input", input);
     const tempState = { [input.name]: input.value };
     const inputSchema = Joi.object({
       [input.name]: this.schema._ids._byKey.get(input.name).schema,
@@ -68,6 +68,7 @@ class Form extends Component {
         label={label}
         optionValues={options}
         onChange={onChange}
+        value={this.state.data[name]}
         errorMessage={errorMessage}
       ></Select>
     );

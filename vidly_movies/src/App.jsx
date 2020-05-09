@@ -17,8 +17,7 @@ class App extends Component {
         <main className="container">
           <Switch>
             <Route path="/login" component={LoginForm} />
-            <Route path="/movies/register" component={RegisterMovie} />
-            <Route path="/movies/:id" component={MovieDetails} />
+            <Route path="/movies/:id" component={RegisterMovie} />
             <Route path="/movies" component={MoviesList} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
