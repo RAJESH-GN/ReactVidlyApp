@@ -17,7 +17,7 @@ class RegisterMovie extends Form {
     if (id !== "new") {
       const movie = getMovie(id);
       this.setState({ data: this.mapToView(movie) });
-    } else this.props.history.push("/movies/register");
+    } else this.props.history.push("/movies/new");
   }
 
   mapToView = (movie) => {
