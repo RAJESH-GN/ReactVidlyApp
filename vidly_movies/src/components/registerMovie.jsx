@@ -11,7 +11,7 @@ class RegisterMovie extends Form {
   };
 
   schema = Joi.object({
-    name: Joi.string().required(),
+    title: Joi.string().required(),
     rate: Joi.number().min(1).max(10).required(),
     stock: Joi.number().min(1).max(100).required(),
     genre: Joi.string().required(),
