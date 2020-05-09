@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "./form";
 import Joi from "@hapi/joi";
 import { getGenres } from "./../services/fakeGenreService";
+import Select from "../common/select";
 
 class RegisterMovie extends Form {
   state = {
@@ -14,7 +15,7 @@ class RegisterMovie extends Form {
     title: Joi.string().required(),
     rate: Joi.number().min(1).max(10).required(),
     stock: Joi.number().min(1).max(100).required(),
-    genre: Joi.string().required(),
+    genre: Joi.string().required().label("Genre"),
   });
 
   toDoAfterValidation = () => {
@@ -25,18 +26,13 @@ class RegisterMovie extends Form {
     return (
       <form onSubmit={this.handleSubmit}>
         {this.renderInput("title", "Title")}
-        <select
-          id="genres"
-          name="genre"
-          className="custom-select"
-          onChange={this.handleChange}
-        >
-          {this.state.genres.map((genre) => (
-            <option className="form-control" key={genre._id} value={genre.name}>
-              {genre.name}
-            </option>
-          ))}
-        </select>
+        {this.renderSelect(
+          "genre",
+          "Genre",
+          this.state.genres,
+          this.handleChange,
+          this.state.errors["genre"]
+        )}
         {this.renderInput("stock", "Number in Stock", "number")}
         {this.renderInput("rate", "Rate", "number")}
         <button className="btn btn-primary" disabled={this.validate()}>

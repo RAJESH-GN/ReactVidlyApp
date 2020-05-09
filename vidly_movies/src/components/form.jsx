@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "../common/input";
+import Select from "../common/select";
 import Joi from "@hapi/joi";
 
 class Form extends Component {
@@ -47,6 +48,7 @@ class Form extends Component {
     if (!result.error) return null;
     return result.error.details[0].message;
   };
+
   renderInput = (name, label, type = "text") => {
     return (
       <Input
@@ -57,6 +59,25 @@ class Form extends Component {
         inputType={type}
         errorMsg={this.state.errors[name]}
       />
+    );
+  };
+  renderSelect = (name, label, options, onChange, errorMessage) => {
+    return (
+      <Select
+        name={name}
+        label={label}
+        optionValues={options}
+        onChange={onChange}
+        errorMessage={errorMessage}
+      ></Select>
+    );
+  };
+
+  renderButton = (label) => {
+    return (
+      <button className="btn btn-primary" disabled={this.validate()}>
+        {label}
+      </button>
     );
   };
 }
